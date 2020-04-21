@@ -4,30 +4,65 @@
 
 package pl.edu.pjatk.s17174;
 
-public class Room {
 
-    private double powierzchniaUzytkowa;
+import pl.edu.pjatk.s17174.interfaces.CheckRent;
 
-    private int number;
+import java.time.LocalDate;
 
-    public Room(double powierzchniaUzytkowa, int number) {
-        this.powierzchniaUzytkowa = powierzchniaUzytkowa;
-        this.number = number;
+public abstract class Room implements CheckRent {
+    private static int counter = 0;
+    public Rent.RentStatus rentStatus;
+    private double useArea;
+    private int roomNumber;
+    private LocalDate dateOfEnd;
+
+    public Room(double useArea) {
+        this.useArea = useArea;
+        this.roomNumber = counter++;
     }
 
-    public double getPowierzchniaUzytkowa() {
-        return powierzchniaUzytkowa;
+
+    public LocalDate getDateOfEnd() {
+        return dateOfEnd;
     }
 
-    public void setPowierzchniaUzytkowa(double powierzchniaUzytkowa) {
-        this.powierzchniaUzytkowa = powierzchniaUzytkowa;
+    public void setDateOfEnd(LocalDate dateOfEnd) {
+        this.dateOfEnd = dateOfEnd;
     }
 
-    public int getNumber() {
-        return number;
+    public double getUseArea() {
+        return useArea;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setUseArea(double useArea) {
+        this.useArea = useArea;
+    }
+
+    public int getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(int roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
+    public Rent.RentStatus getRentStatus() {
+        return rentStatus;
+    }
+
+    public void setRentStatus(Rent.RentStatus rentStatus) {
+        this.rentStatus = rentStatus;
+    }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "useArea=" + useArea +
+                ", roomNumber=" + roomNumber +
+                '}';
+    }
+
+    public void remove() {
+
     }
 }

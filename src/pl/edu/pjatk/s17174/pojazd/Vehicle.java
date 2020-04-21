@@ -4,25 +4,23 @@
 
 package pl.edu.pjatk.s17174.pojazd;
 
-public abstract class Vehicle {
+import pl.edu.pjatk.s17174.Item;
 
-    String name;
-    double area;
+public abstract class Vehicle extends Item {
+
     double engineCapacity;
     VehicleType vehicleType;
     EngineType engineType;
 
     public Vehicle(String name, double area, double engineCapacity, VehicleType vehicleType, EngineType engineType) {
-        this.name = name;
-        this.area = area;
+        super(name, area);
         this.engineCapacity = engineCapacity;
         this.vehicleType = vehicleType;
         this.engineType = engineType;
     }
 
     public Vehicle(String name, double area, double engineCapacity, EngineType engineType) {
-        this.name = name;
-        this.area = area;
+        super(name, area);
         this.engineCapacity = engineCapacity;
         this.engineType = engineType;
     }
@@ -30,16 +28,14 @@ public abstract class Vehicle {
     @Override
     public String toString() {
         return "Vehicle{" +
-                "name='" + name + '\'' +
-                ", area=" + area +
-                ", engineCapacity=" + engineCapacity +
+                "engineCapacity=" + engineCapacity +
                 ", vehicleType=" + vehicleType +
                 ", engineType=" + engineType +
                 '}';
     }
 
     public enum VehicleType {
-        CITY, OFFROAD, SPORT;
+        CITY, OFFROAD, SPORT
 
     }
 

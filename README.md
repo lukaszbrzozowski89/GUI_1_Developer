@@ -36,13 +36,13 @@ Mozliwe sa dwa sposoby wskazania rozmiaru pomieszczenia:
 tym podejsciu powierzchnia uzytkowa pomieszczenia zostaje wyliczona podczas tworzenia
 obiektu na podstawie przekazanych wartosci).
 
-Pomieszczenie dla okreslonego najemcy posiada równiez date rozpoczecia najmu oraz date
+Pomieszczenie dla okreslonego najemcy posiada równiez LocalDate rozpoczecia najmu oraz LocalDate
 zakonczenia najmu. Jesli data zakonczenia najmu sie przedawniła, to zostaje wystosowane pismo
 (obiekt typu File), które zostaje zapisane do obiektu klasy Osoba definiujacego konkretnego
 najemce.
 
 W zadaniu równiez nalezy zaimplementowac mechanizm upływajacego czasu za posrednictwem
-watków. Watek powinien co 5 sekund przesuwac date o 1 dzien do przodu, symulujac
+watków. Watek powinien co 5 sekund przesuwac LocalDate o 1 dzien do przodu, symulujac
 upływ czasu. Równolegle powinny byc co 10 sekund sprawdzane kwestie wynajmu, czy wszystkie
 pomieszczenia nadal sa w trakcie najmu, czy moze wynajem pomieszczenia juz ustał.
 
@@ -61,7 +61,7 @@ sprzedazy pokrywa najem pomieszczenia na najblizsze 2 miesiace. Jesli nie było 
 utylizacji podlegaja wszystkie przechowywane rzeczy na miejscu parkingowym.
 
 Osoba posiada ponad wymienione wczesniej informacje takie dane jak imie, nazwisko, pesel,
-adres, date urodzenia.
+adres, LocalDate urodzenia.
 
 Jesli najem bedzie chciała rozpoczac osoba z wiecej niz trzema zadłuzeniami (co najmniej 3
 obiekty typu File) na przestrzeni najmów na tle całego osiedla, rzucony powinien zostac wyjatek

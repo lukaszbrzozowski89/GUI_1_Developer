@@ -4,31 +4,100 @@
 
 package pl.edu.pjatk.s17174;
 
-import java.util.Date;
+import pl.edu.pjatk.s17174.interfaces.CheckRent;
+import pl.edu.pjatk.s17174.utils.Timer;
 
-public class Parking extends Room {
+import java.time.LocalDate;
+import java.util.ArrayList;
 
-    private Date dateOfStart;
 
-    private Date dateOfEnd;
+public class Parking extends Room implements CheckRent {
 
-    public Parking(double powierzchniaUzytkowa, int number) {
-        super(powierzchniaUzytkowa, number);
+    private LocalDate dateOfStart;
+    private Person rentOwner;
+    private LocalDate dateOfEnd;
+    private ArrayList<Item> listOfItems = new ArrayList<>();
+    private Tenant tenant;
+    private int roomNumber;
+
+
+    public Parking(double useArea, Tenant tenant) {
+        super(useArea);
+        this.tenant = tenant;
+        this.roomNumber = super.getRoomNumber();
     }
 
-    public Date getDateOfStart() {
+    public ArrayList<Item> getListOfItems() {
+        return listOfItems;
+    }
+
+    public void setListOfItems(ArrayList<Item> listOfItems) {
+        this.listOfItems = listOfItems;
+    }
+
+    public LocalDate getDateOfStart() {
         return dateOfStart;
     }
 
-    public void setDateOfStart(Date dateOfStart) {
+    public void setDateOfStart(LocalDate dateOfStart) {
         this.dateOfStart = dateOfStart;
     }
 
-    public Date getDateOfEnd() {
+    public LocalDate getDateOfEnd() {
         return dateOfEnd;
     }
 
-    public void setDateOfEnd(Date dateOfEnd) {
+    public void setDateOfEnd(LocalDate dateOfEnd) {
         this.dateOfEnd = dateOfEnd;
+    }
+
+    @Override
+    public Rent.RentStatus getRentStatus() {
+        return super.getRentStatus();
+    }
+
+    @Override
+    public void setRentStatus(Rent.RentStatus rentStatus) {
+        super.setRentStatus(rentStatus);
+    }
+
+    @Override
+    public int getRoomNumber() {
+        return roomNumber;
+    }
+
+    @Override
+    public void setRoomNumber(int roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
+    @Override
+    public void checkRent(ArrayList<Room> room) {
+        if (Timer.getActualDate().isAfter(this.getDateOfEnd())) {
+            setRentStatus(Rent.RentStatus.EXPIRED);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Parking{" +
+                "LocalDateOfStart=" + dateOfStart +
+                ", LocalDateOfEnd=" + dateOfEnd +
+                ", roomNumber=" + roomNumber +
+                '}';
+    }
+
+    public Person getRentOwner() {
+        return rentOwner;
+    }
+
+    public void setRentOwner(Person rentOwner) {
+        this.rentOwner = rentOwner;
+    }
+
+    @Override
+    public void remove() {
+        super.remove();
+        getListOfItems().clear();
     }
 }

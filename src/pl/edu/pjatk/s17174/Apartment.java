@@ -67,9 +67,10 @@ public class Apartment extends Room implements CheckRent {
                 "parking=" + parking +
                 ", tenant=" + tenant +
                 ", roomNumber=" + roomNumber +
+                ", dateOfStart=" + dateOfStart +
+                ", dateOfEnd=" + dateOfEnd +
                 '}';
     }
-
 
     @Override
     public void checkRent(ArrayList<Room> room) {

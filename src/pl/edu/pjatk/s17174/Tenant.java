@@ -115,6 +115,11 @@ public class Tenant extends Person implements RentAction, ItemAction {
         apartment.removeTenant(tenant);
     }
 
+    @Override
+    public void checkIn(Apartment apartment, Tenant tenant) {
+        apartment.addTenant(tenant);
+    }
+
 
     @Override
     public void renewRent(Room room, LocalDate renewDate) {
@@ -150,4 +155,13 @@ public class Tenant extends Person implements RentAction, ItemAction {
         this.fileCounter = fileCounter;
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + "\nTenant{" +
+                "isMainTenant=" + isMainTenant +
+                ", wantToRentParking=" + wantToRentParking +
+                ", file=" + file +
+                ", fileCounter=" + fileCounter +
+                '}';
+    }
 }

@@ -19,7 +19,9 @@ public interface RentAction {
 
     void rent(Parking parking, int days) throws ProblematicTenantException;
 
-    void checkOut(Apartment apartment, Tenant person);
+    void checkOut(Apartment apartment, Tenant tenant);
+
+    void checkIn(Apartment apartment, Tenant tenant);
 
     void renewRent(Room room, LocalDate renewDate);
 

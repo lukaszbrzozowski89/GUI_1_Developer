@@ -31,27 +31,28 @@ public class Timer extends Thread implements CheckRent {
         while (true) {
             try {
                 sleep(5000);
-                if (counter % 2 == 0) {
-                    checkRent(Rent.getListOfRents());
-                }
-                counter++;
             } catch (InterruptedException exc) {
                 exc.getStackTrace();
                 return;
             }
             setActualTime(actualTime.plusDays(1));
-
+            if (counter % 2 == 0) {
+                checkRent(Rent.getListOfRents());
+            }
+            counter++;
         }
     }
 
     @Override
     public void checkRent(ArrayList<Room> listOfRents) {
         for (Room room : listOfRents) {
-            if (room.getDateOfEnd().isAfter(getActualDate()) && room.getRentStatus().equals(Rent.RentStatus.VALID)) {
+            if (Timer.getActualDate().isAfter(room.getDateOfEnd())
+                    && (room.getRentStatus().equals(Rent.RentStatus.VALID) || room.getRentStatus().equals(Rent.RentStatus.RENEWED)
+            )) {
                 room.setRentStatus(Rent.RentStatus.EXPIRED);
-                System.out.println(" Pomieszczenie : " + room + "skonczyl sie najem");
+                System.out.println(" Pomieszczenie : " + room.getRoomNumber() + " " + ": \tskonczyl sie najem!");
             }
-            if (room.getDateOfEnd().isAfter(room.getDateOfEnd().plusDays(30)) && room.getRentStatus().equals(Rent.RentStatus.EXPIRED)) {
+            if (Timer.getActualDate().isAfter(room.getDateOfEnd().plusDays(30)) && room.getRentStatus().equals(Rent.RentStatus.EXPIRED)) {
                 room.remove();
             }
         }

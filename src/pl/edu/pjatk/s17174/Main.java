@@ -71,12 +71,19 @@ public class Main {
         apartmentArrayList.add(apartment4);
         apartmentArrayList.add(apartment5);
         apartmentArrayList.add(apartment6);
+        person.setWantToRentParking(true);
         person.rent(apartment, 50);
+        person2.setWantToRentParking(true);
         person2.rent(apartment2, 50);
+        person3.rent(apartment3, 15);
+        person4.rent(apartment4, 3);
+        person5.rent(apartment5, 2);
+        person.checkIn(apartment, person6);
         Estate estate = new Estate(developer, blocList);
         Bloc bloc = new Bloc(apartmentArrayList, parkingLinkedList, estate);
         blocList.add(bloc);
         Tenant chosenTenant = personList.get(0);
+        Room chosenRoom = apartmentArrayList.get(0);
         menuText();
         String choice = null;
         Scanner scan = new Scanner(System.in);
@@ -120,11 +127,22 @@ public class Main {
                 case "f":
                     System.out.println("Odnowienie najmu. Ile dni?");
                     int renewDays = scan.nextInt();
-                    chosenTenant.renewRent(apartment, LocalDate.now().plusDays(renewDays));
+                    chosenTenant.renewRent(chosenRoom, LocalDate.now().plusDays(renewDays));
                     break;
-                case "g":
-
-
+                case "m":
+                    int m = scan.nextInt();
+                    System.out.println("Wpisz numer pomieszczenia:");
+                    chosenRoom = chosenTenant.getListOfRooms().get(m - 1);
+                    System.out.println("Room number: " + chosenRoom.getRoomNumber());
+                    break;
+                case "n":
+                    System.out.println(apartmentArrayList);
+                    break;
+                case "o":
+                    System.out.println(parkingLinkedList);
+                    break;
+                case "p":
+                    System.out.println(personList);
                     break;
                 case "?":
                     menuText();
@@ -135,7 +153,7 @@ public class Main {
 
 
     public static void menuText() {
-        System.out.println("Witaj! \n Wciśnij przycisk odpowiadający danej akcji aby zobaczyć działanie programu");
+        System.out.println("Witaj! \nWciśnij przycisk odpowiadający danej akcji, aby zobaczyć działanie programu\n");
         System.out.println("a: Wybierz osobę");
         System.out.println("b: Wynajmij mieszkanie");
         System.out.println("c: Włóż przedmiot do parkingu");
@@ -144,6 +162,10 @@ public class Main {
         System.out.println("d: Zaparkuj auto do parkingu");
         System.out.println("z: Wyświetl aktualną datę:");
         System.out.println("?: Powrót do menu");
+        System.out.println("m: Wybierz pomieszczenie");
+        System.out.println("n: Wyświetl wszystkie apartamenty");
+        System.out.println("o: Wyświetl wszystkie parkingi");
+        System.out.println("p: Wyświetl wszystkie osoby");
         System.out.println("q: Aby zakończyć działanie programu");
     }
 
